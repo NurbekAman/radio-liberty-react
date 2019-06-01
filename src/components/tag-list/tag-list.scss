@@ -1,0 +1,36 @@
+$blockName: ".tag-list";
+
+#{$blockName} {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__container {
+    height: 300px;
+    width: 500px;
+    overflow-y: auto;
+    border: .1rem solid #d8d8d8;
+    box-shadow: 0 0.2rem 0.4rem rgba(0,0,0,.19);
+    border-radius: .3rem;
+    background-color: #fff;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid darkgrey;
+    font-size: 1.6rem;
+    color: #000;
+    margin: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+}
