@@ -33,7 +33,11 @@ export function addTagToURL(value) {
 
 function removeTagFromList(text, tags) {
   if (tags && tags.length > 0) {
-    return tags.filter(x => x !== text ).join(',');
+    const index = tags.lastIndexOf(text);
+
+    delete tags[index];
+
+    return tags.filter(x=>x).join(',');
   }
 
   return '';

@@ -35,6 +35,12 @@ class TagList extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('hashchange', this.addTagList);
+
+    this.addTagList();
+  }
+
+  addTagList = () => {
     const { dispatch } = this.props;
 
     const tags = getTagsFromURL().reduce((tags, value, index) => {
