@@ -13,11 +13,6 @@ describe('HrefHelper', () => {
     expect(getTagsFromURL()).toMatchObject(['blue', 'red', 'white']);
   });
 
-  it('should correctly remove tag from url', () => {
-    removeTag('red')
-    expect(window.location.href).toEqual('http://google.com#tags=blue,white');
-  });
-
   it('should correctly get base url', () => {
     expect(getBaseURL()).toEqual('http://google.com#tags=');
   });

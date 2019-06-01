@@ -15,7 +15,7 @@ const blockName = 'tag-list';
 class TagList extends Component {
   static propTypes = {
     tags: PropTypes.shape({
-      key: PropTypes.string,
+      id: PropTypes.string,
       value: PropTypes.string,
     }),
   };
@@ -66,8 +66,10 @@ class TagList extends Component {
     const { tags } = this.state;
     const { dispatch } = this.props;
 
+    const newTags = tags.filter(x => x.id !== id);
+
     this.setState({
-      tags: tags.filter(x => x.id !== id),
+      tags: newTags,
     });
 
     dispatch({
@@ -75,7 +77,7 @@ class TagList extends Component {
       payload: { tag: { value: text, id } },
     });
 
-    removeTag(text);
+    removeTag(newTags);
   }
 
   renderTag = tag => {
@@ -110,8 +112,8 @@ class TagList extends Component {
 }
 
 const mapStateToProps = state => {
-  const { reducer } = state;
-  const { tags } = reducer;
+  const { reducerTagList } = state;
+  const { tags } = reducerTagList;
 
   return {
     tags,

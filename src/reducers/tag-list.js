@@ -1,5 +1,3 @@
-import omit from 'lodash/omit';
-
 const name = 'tag-list';
 
 const actionMap = {

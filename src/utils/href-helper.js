@@ -1,8 +1,11 @@
-import compose from 'lodash/fp/compose';
-import partial from 'lodash/fp/partial';
-
 import CONSTANTS from '../components/tag-list/constant';
 
+/**
+ * get tags from url
+ * and return array of tags
+ *
+ * @return {string[]|Array}
+ */
 export function getTagsFromURL() {
   const matched  = window.location.href.match(/.+#tags=(.+)/);
 
@@ -21,10 +24,15 @@ export function getBaseURL() {
   return matchedTags && matchedTags[0];
 }
 
+/**
+ * add tag to URL
+ *
+ * @param value = tag
+ */
 export function addTagToURL(value) {
   const tagParts = getTagsFromURL();
 
-  if (window.location.href.includes('#tags')) {
+  if (window.location.href.includes(CONSTANTS.TAG_HREF)) {
     window.location.href += tagParts.length > 0 ? `,${value}` : value;
   } else {
     window.location.href = `${CONSTANTS.TAG_HREF}=${value}`;
@@ -47,11 +55,14 @@ function setURLWithTag(tagsPart) {
   window.location.href = getBaseURL() + tagsPart;
 }
 
-export function removeTag(tag) {
-  compose(
-    setURLWithTag,
-    partial(removeTagFromList, [tag]),
-    getTagsFromURL,
-  )();
+/**
+ * remove tag from URL
+ *
+ * @param tag - string
+ */
+export function removeTag(tagList) {
+  const tags = tagList.map(x => x.value).join(',');
+
+  setURLWithTag(tags);
 }
 

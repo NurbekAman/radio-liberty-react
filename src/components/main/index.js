@@ -8,7 +8,7 @@ import './main.scss';
 
 const blockName = 'main';
 
-class Index extends Component {
+class Main extends Component {
  render() {
   return (
     <div className={blockName}>
@@ -20,4 +20,4 @@ class Index extends Component {
  }
 }
 
-export default Index;
+export default Main;

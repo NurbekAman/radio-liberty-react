@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import uuid from 'uuid/v4';
+
 import { actionMap } from '../../reducers/tag-list';
 
 import { addTagToURL } from '../../utils/href-helper';
@@ -20,37 +22,47 @@ class TagControl extends PureComponent {
     this.setState({ value });
   }
 
-  handleClick = () => {
+  handleClick = e => {
+    e.preventDefault();
+
     const { value } = this.state;
 
     const { dispatch } = this.props;
 
-    dispatch({
-      type: actionMap.ADD_TAG,
-      payload: { tag: { value, id: value + Math.random() } },
-    });
+    if (value) {
+      dispatch({
+        type: actionMap.ADD_TAG,
+        payload: {tag: {value, id: uuid()}},
+      });
 
-    addTagToURL(value);
+      this.setState({value: ''})
+
+      addTagToURL(value);
+    }
   }
 
   render() {
+    const { value } = this.state;
+
     return (
       <div className={blockName}>
-        <div className={`${blockName}__list`}>
-          <input
-            placeholder="Enter tag"
-            type="text"
-            className={`${blockName}__input`}
-            name="tag-input"
-            onChange={this.handleChange}
-          />
-          <input
-            type="button"
-            className={`${blockName}__button`}
-            value="add tag"
-            onClick={this.handleClick}
-          />
-        </div>
+        <form onSubmit={this.handleClick}>
+          <div className={`${blockName}__list`}>
+            <input
+              value={value}
+              placeholder="Enter tag"
+              type="text"
+              className={`${blockName}__input`}
+              name="tag-input"
+              onChange={this.handleChange}
+            />
+            <input
+              type="button"
+              className={`${blockName}__button`}
+              value="add tag"
+            />
+          </div>
+        </form>
       </div>
     );
   }

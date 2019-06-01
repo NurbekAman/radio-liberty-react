@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { reducer } from './tag-list';
+import { reducer as reducerTagList } from './tag-list';
 
 export default combineReducers({
-  reducer,
+  reducerTagList,
 });
